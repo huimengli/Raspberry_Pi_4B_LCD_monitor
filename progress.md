@@ -25,6 +25,9 @@
 - `1743872` feat(AI): 提取老系统针接口双屏驱动与配置到工作区（215 个文件）
   - 已本地 commit，**未 push**（本仓库无远程地址）
   - 过程 hash：`c766bdb` → `a2e9ce7` → `df598c9` → `1743872`（amend 修正嵌入 git 仓库与 tree.md）
+- `ced1c3f` docs(AI): 记录提交 hash、rpi-fbcp 溯源并同步 tree.md —— 本地 commit，未 push
+- `2897f47` docs(AI): 记录 Q2/Q3 追问超时未答，保持 wait —— 本地 commit，未 push
+- `d53b6e8` feat(AI): 准备新系统安装脚本与 KMS 镜像结论（223 个文件）—— 本地 commit，未 push
 ## 2026-11-07-14-17 会话 3：用户答复 Q2/Q3，准备安装
 
 - Q2 答复：针接口屏只有 1 块（3.5 寸、可触摸，即 MHS35）；老系统靠 `fbcp` 让两块屏显示**相同内容（镜像）**。
