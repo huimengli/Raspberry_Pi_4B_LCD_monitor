@@ -25,3 +25,12 @@
 - `1743872` feat(AI): 提取老系统针接口双屏驱动与配置到工作区（215 个文件）
   - 已本地 commit，**未 push**（本仓库无远程地址）
   - 过程 hash：`c766bdb` → `a2e9ce7` → `df598c9` → `1743872`（amend 修正嵌入 git 仓库与 tree.md）
+## 2026-11-07-14-17 会话 3：用户答复 Q2/Q3，准备安装
+
+- Q2 答复：针接口屏只有 1 块（3.5 寸、可触摸，即 MHS35）；老系统靠 `fbcp` 让两块屏显示**相同内容（镜像）**。
+- Q3 答复：授权"在不损坏设备的前提下尝试安装"。本会话 `sudo` 不可用、`/boot/firmware` 只读 → 只能准备脚本，由用户执行。
+- 结论：老式 `fbcp` 镜像在新系统不可复现（无 `/dev/vchiq`、无 `/opt/vc`；`rpi-fbcp`/`fbcp-ili9341` 均依赖 DispmanX，后者 2024-02 已归档）。核查仓库清单与 KMS 替代方案表写入 `MANIFEST.md`。
+- 新增 `drivers_extracted/apply/`：proposed_config.txt / proposed_cmdline.txt / mhs35.dtbo / install_mhs35.sh / revert_mhs35.sh / verify_mhs35.sh / touch_calibrate.sh（全部 `bash -n` 通过）。
+- 已验证运行内核 DT 有 `spi@7e204000`(spi0) 与 `gpio@7e200000`，overlay `__fixups__` 目标存在。
+- 新系统仍未改动；安装需用户在终端 `sudo bash drivers_extracted/apply/install_mhs35.sh`。
+- 新增 Q4（第二块屏/HDMI 实际分辨率档位）、Q5（KMS 下"同内容"实现方案选择）→ `need_user.md`。

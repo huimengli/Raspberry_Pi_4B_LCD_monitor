@@ -97,3 +97,30 @@ c5505a9cd634486830ee5a0c03cee2b6  boot_firmware/mhs35-overlay.dtb
 506202c9e6e2eea6d9292147e2fe5c4a  boot_firmware/config.txt
 e74a7a85f1046f3ce379124d0934faee  boot_firmware/cmdline.txt
 ```
+## KMS 镜像（老系统 fbcp 的等价能力）结论
+
+- 老系统的镜像靠 `fbcp`（DISPMANX）：新系统 **无 `/dev/vchiq`、无 `/opt/vc`（vcos/bcm_host/dispmanx 库全部移除）**，`tasanakorn/rpi-fbcp` 与 `juj/fbcp-ili9341`（README 2024-02 明确已归档、依赖 DispmanX）在 `vc4-kms-v3d` 下**无法构建/运行**。
+- 核查过的仓库：`tasanakorn/rpi-fbcp`(2020 停)、`juj/fbcp-ili9341`(1818★，已归档)、`balena-labs-projects/fbcp`(仅 Docker 包装，仍是上述两者)、`jobitjoseph/fbcp-ST7796`、`bitbank2/BB-CP`(2018)。均依赖 DispmanX，无 KMS 版可用。
+- 新系统已装 `xserver-xorg-video-fbdev`（`fbdev_drv.so`），Xorg 可以把 SPI 屏的 `/dev/fb1` 作为独立 X screen；fbtft 在 KMS 内核下正常注册 fbdev。
+- 因此现实路径：① SPI 屏作为独立 framebuffer（控制台/X 独立会话）；② "两块屏显示相同内容" 需在 KMS 下重做（选项见下），老式 fbcp 镜像不可复现。
+
+### KMS 下实现"同内容"的可选路径（未实施，等 Q4/Q5 确认）
+
+| 方案 | 做法 | 代价 |
+| --- | --- | --- |
+| A. 双 X server | `Xorg :0` 走 KMS(HDMI) + `Xorg :1` 走 fbdev(/dev/fb1)，程序在两个 DISPLAY 各跑一份 | 需要程序跑两实例；触摸各自标定 |
+| B. Xephyr 嵌套 | `Xephyr -fbdev /dev/fb1 -screen 480x320` 把应用窗口渲染进 SPI 屏 | 需装 Xephyr；只镜像指定窗口 |
+| C. 只给 SPI 屏跑 X | `Xorg` 以 fbdev 驱动 `/dev/fb1` 为唯一显示，HDMI 接控制台/串口 | HDMI 无图形 |
+| D. 改回 legacy 模式 | 新固件里 `vc4-fkms-v3d-pi4.dtbo` 存在，可试 `dtoverlay=vc4-fkms-v3d` + 重编译 fbcp | 新 OS 缺 vcos 库，几乎不可行；且失去 KMS/图形加速 |
+
+## 安装产物（新增 `apply/`）
+
+- `apply/proposed_config.txt`：新系统 config.txt 完整版（保留原 KMS/64 位设置，在 `[all]` 加 `dtparam=spi=on` + `dtoverlay=mhs35:rotate=270` + 老系统 HDMI 自定义分辨率段，带 `>>> forDisplay MHS35 <<<` 标记）
+- `apply/proposed_cmdline.txt`：新系统 cmdline + `fbcon=map:10 fbcon=font:ProFont6x11 logo.nologo`（控制台输出到 SPI 屏）
+- `apply/mhs35.dtbo`：拷入 `/boot/firmware/overlays/` 的覆盖层
+- `apply/install_mhs35.sh`（`bash -n` 通过）：备份原 config/cmdline 到 `backup_new_system/` → remount rw → 装 overlay → 覆盖 config/cmdline → 校验 → remount ro
+- `apply/revert_mhs35.sh`：按最新备份回退并删除 overlay
+- `apply/verify_mhs35.sh`：重启后只读验证（`/dev/spidev*`、`fb*`、`dmesg` fbtft/ili9486/ads7846、输入设备）
+- `apply/touch_calibrate.sh`：X 下触摸矩阵校准提示（老标定值 `3936 227 268 3880` + `SwapAxes=1` 是 rotate 90 标定的，rotate 270 下需重标）
+- 已验证运行内核 DT 存在 overlay 目标：`/sys/firmware/devicetree/base/soc/spi@7e204000`（spi0）与 `gpio@7e200000`，`__fixups__` 的 `spi0`/`gpio` 可解析
+- 限制：本会话 `sudo` 被 `no new privileges` 阻止，`/boot/firmware` 只读，安装命令**必须由用户在终端执行**

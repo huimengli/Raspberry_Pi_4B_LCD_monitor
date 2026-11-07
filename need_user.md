@@ -1,37 +1,39 @@
 # need_user.md
 
-<!-- 已归档于 ai_buckup/need_user.md_2026-11-07-12-52-00.md（Q1 已解决） -->
+<!-- 已归档于 ai_buckup/need_user.md_2026-11-07-12-52-00.md（Q1）、ai_buckup/need_user.md_2026-11-07-14-17-00.md（Q2/Q3） -->
 
 ## Q1 · 挂载老系统根分区 `/dev/sda2`
 
-- status: done
-- 时间：2026-11-07-12-16-48
-- 问题：`sudo` 被 `no new privileges` 阻止，agent 无法挂载 `sda2` 扫描老系统驱动。
-- 回答：无需用户介入，`udisksctl mount -b /dev/sda2 -o ro` 免授权成功，挂载于 `/media/huimengli/rootfs`（只读）。已归档。
+- status: done（`udisksctl mount -b /dev/sda2 -o ro` 免 sudo 成功，只读，`/media/huimengli/rootfs`）
 
 ## Q2 · 第二块屏幕是什么
 
-- status: wait
-- 时间：2026-11-07-12-52-00
-- 问题：老系统 `config.txt` 里针接口屏只有 1 块（MHS35，3.5 寸 480x320 SPI 屏），另有 HDMI 自定义分辨率 `hdmi_cvt 1280 720`（及 8 份按分辨率的 `config*.bak` + `显示器输出/*.sh` 切换脚本）。`Xorg.1.log` 经查是 VNC，不是第二块屏。
-- 需要确认：
-  1. 两块屏幕的**型号/尺寸/接口**（是否两块都是 SPI 针接口屏？第二块接在 SPI1 还是 HDMI？）。
-  2. 若是两块 SPI 屏，第二块的控制器型号与接线 GPIO（RESET/DC/CS）分别是什么。
-  3. 老系统当时两块屏分别显示什么（各自分辨率/旋转）。
-- 影响：决定安装方案（第二块屏需要额外 overlay，如 `spi1-1cs` + `fbtft,ili9486` 或新增自定义 dts）。
+- status: done
+- 答复（2026-11-07-14-17）："对的，3.5寸小屏幕，可触摸，只有一块，老系统只能让两块屏幕显示相同内容"
+- 解读：针接口屏只有 MHS35 一块（3.5 寸 + 触摸）；"两块屏同内容"= 老系统 `fbcp` 的镜像效果，另一块是 HDMI。
 
 ## Q3 · 新系统安装授权
 
+- status: done
+- 答复（2026-11-07-14-17）："如果不会损坏设备，你可以尝试安装"
+- 约束：本会话 `sudo` 被 `no new privileges` 阻止，`/boot/firmware` 只读挂载 → 安装脚本已备好，需用户在终端 `sudo` 执行。
+- 安全性说明：只改 `/boot/firmware/config.txt`、`cmdline.txt` 与新增一个 overlay 文件；不刷固件、不动 SPI 电气参数（115MHz 是老系统用过的同一配置）；原配置先备份到 `drivers_extracted/backup_new_system/`，可一键回退。
+
+## Q4 · 第二块屏（HDMI）用哪一档分辨率
+
 - status: wait
-- 时间：2026-11-07-12-52-00
-- 问题：安装需要 root（`sudo` 在本会话不可用），且要改 `/boot/firmware/config.txt`（当前只读挂载）与拷贝 overlay 到 `/boot/firmware/overlays/`。
-- 请确认：
-  1. 是否授权由用户在终端执行 `MANIFEST.md` 第"新系统安装建议"里的命令（agent 提供逐条命令，用户执行）。
-  2. 是否先只启用 MHS35 单屏（最小改动：`dtparam=spi=on` + `dtoverlay=mhs35:rotate=270`），验证后再处理第二块屏。
-- 回答：
+- 时间：2026-11-07-14-17
+- 问题：老系统有 8 档 `config*.bak`（480x320 / 600x400 / 720x480 / 960x640 / 1280x720 / 1920x1080 + 两个 Back 变体），`apply/proposed_config.txt` 目前取 1280x720（老系统当前 `config.txt` 用的档位）。
+- 需要：确认第二块屏的分辨率档位（或直接告诉我它型号/原生分辨率）。
+
+## Q5 · KMS 下"两块屏显示相同内容"用哪种实现
+
+- status: wait
+- 时间：2026-11-07-14-17
+- 背景：老系统的 `fbcp` 镜像在新系统不可复现（无 DispmanX）。KMS 下可行路径：A 双 X server（HDMI=:0 KMS + SPI fbdev :1，程序跑两实例）/ B Xephyr 嵌套到 SPI 屏 / C 只在 SPI 屏跑 X / D 改回 fkms+重编译 fbcp（新 OS 缺 vcos，几乎不可行）。
+- 需要：选 A/B/C/D 之一（推荐 A），并说明需要在 SPI 屏上跑的是什么程序（老系统上有 `getInfoCN.py` 等自启程序？）。
 
 ## 追问记录
 
-- 2026-11-07-13-15：已通过会话内提问向用户询问 Q2（第二块屏是什么）与 Q3（安装授权路径），
-  两次均等待超时、未收到回答，Q2/Q3 保持 `status: wait`。
-- 新系统未被改动；提取物已本地提交（`1743872`、`ced1c3f`），未 push（无远程）。
+- 2026-11-07-13-15：会话内提问 Q2/Q3，两次等待超时未答（当时保持 wait）。
+- 2026-11-07-14-17：用户直接答复 Q2/Q3（见上），Q4/Q5 为新增。

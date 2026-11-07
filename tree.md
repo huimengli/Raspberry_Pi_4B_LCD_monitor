@@ -1,6 +1,7 @@
   .gitignore
   README.md
   ai_buckup/need_user.md_2026-11-07-12-52-00.md
+  ai_buckup/need_user.md_2026-11-07-14-17-00.md
   drivers_extracted/LCD-show/.have_installed
   drivers_extracted/LCD-show/.system_backup/.have_installed
   drivers_extracted/LCD-show/.system_backup/99-fbturbo.conf
@@ -142,6 +143,13 @@
   drivers_extracted/LCD-show/xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb
   drivers_extracted/LCD-show/xserver-xorg-input-evdev_2.10.5-1_armhf.deb
   drivers_extracted/MANIFEST.md
+  drivers_extracted/apply/install_mhs35.sh
+  drivers_extracted/apply/mhs35.dtbo
+  drivers_extracted/apply/proposed_cmdline.txt
+  drivers_extracted/apply/proposed_config.txt
+  drivers_extracted/apply/revert_mhs35.sh
+  drivers_extracted/apply/touch_calibrate.sh
+  drivers_extracted/apply/verify_mhs35.sh
   drivers_extracted/boot_firmware/cmdline.txt
   drivers_extracted/boot_firmware/config.txt
   drivers_extracted/boot_firmware/config1080p.bak

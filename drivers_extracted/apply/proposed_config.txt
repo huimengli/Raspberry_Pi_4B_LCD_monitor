@@ -1,0 +1,40 @@
+# For more options and information see
+# http://rptl.io/configtxt
+
+camera_auto_detect=1
+display_auto_detect=1
+auto_initramfs=1
+dtoverlay=vc4-kms-v3d
+max_framebuffers=2
+disable_fw_kms_setup=1
+arm_64bit=1
+disable_overscan=1
+arm_boost=1
+dtparam=audio=on
+
+[cm4]
+otg_mode=1
+
+[cm5]
+dtoverlay=dwc2,dr_mode=host
+
+[pi5]
+dtoverlay=nospi10
+
+[all]
+
+# >>> forDisplay MHS35 (针接口 3.5寸 SPI 屏, 提取自老系统) >>>
+# 来源: drivers_extracted/MANIFEST.md   时间: 2026-11-07-14-15
+# 屏: ILI9486 480x320 @SPI0/CS0, RESET=GPIO25, DC=GPIO24
+# 触摸: ADS7846 @SPI0/CS1, PENIRQ=GPIO17
+dtparam=spi=on
+dtoverlay=mhs35:rotate=270
+# 下面 HDMI 自定义分辨率沿用老系统 config.txt（第二块屏）。
+# 若第二块屏不是 1280x720，换成对应档（见 boot_firmware/config*.bak）。
+hdmi_force_hotplug=1
+hdmi_group=2
+hdmi_mode=1
+hdmi_mode=87
+hdmi_cvt 1280 720 60 0 0 0
+hdmi_drive=2
+# <<< forDisplay MHS35 <<<
