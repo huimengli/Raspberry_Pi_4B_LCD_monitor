@@ -1,0 +1,5 @@
+# 临时与缓存产物
+tmp/
+*.log
+*.tmp
+.DS_Store

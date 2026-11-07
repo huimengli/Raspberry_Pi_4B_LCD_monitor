@@ -1,0 +1,21 @@
+# progress.md
+
+## 2026-11-07-12-16-48 会话 1：项目初始化 + 环境勘察
+
+需求：从 USB 接入的老系统提取树莓派 4B 两块针接口外接屏幕的驱动到工作区（`records/2026-11-07-12-16-48.md`）。
+
+- 工作区 `/home/huimengli/Desktop/forDisplay` 初始仅有 `.git`（`master` 无提交，无远程地址）。已落盘 README/progress/tree/todo/records/need_user。
+- 新系统：`Linux pi 6.18.50+rpt-rpi-v8` Debian 13.7 arm64；`/dev/mmcblk0p2` 以只读挂载为 `/`；`/dev/mmcblk0p1` → `/boot/firmware`（只读）。
+- 老系统：`/dev/sda` 59.6G；`sda1`(vfat, 256M) 已挂载 `/media/huimengli/boot`（只读），`sda2`(ext4, 59.4G) 未挂载。
+- `sda1` 可见 `config.txt`(2025-03-24) 及 8 个按分辨率命名的 `config*.bak`（1080p/720p/640p/480p/400p/320p/320pBack/1080pBack），提示老系统是多分辨率/多屏切换配置。
+- 阻塞：`sudo` 被 `no new privileges` 阻止，无法挂载 `sda2` → 记入 `need_user.md` Q1（需用户执行挂载命令）。
+- 状态：**进行中**（boot 分区勘察 + 用户挂载根分区后继续）。
+## 2026-11-07-12-52-00 会话 2：驱动勘察与提取完成
+
+- `udisksctl mount -b /dev/sda2 -o ro` **免 sudo** 成功挂载老系统根分区 → `/media/huimengli/rootfs`（只读），Q1 已解决（`sudo` 因 `no new privileges` 不可用）。
+- 老系统确认为 Raspbian 2020-05-27 armhf + 内核 5.10.103；针接口屏为 **MHS35（ILI9486, SPI0/CS0, RESET=GPIO25, DC=GPIO24）+ ADS7846 触摸（CS1, PENIRQ=GPIO17）**，老 `config.txt` 用 `dtoverlay=mhs35:rotate=270`。
+- 新系统缺失点：`mhs35.dtbo` 不在 `/boot/firmware/overlays`；`dtparam=spi=on` 未开（无 `/dev/spidev*`）；新内核仍含 `fbtft/fb_ili9486/ads7846` 模块，官方 `fbtft.dtbo` 支持 `ili9486`；新内核无 `fbtft_device.ko`（上游已删）→ 只能走设备树 overlay。
+- 老 `fbcp` 为 32 位 armhf 二进制，arm64 + KMS 内核下不可用；`Xorg.1.log` 经查为 VNC，非第二块屏。
+- 提取 230 个文件到 `drivers_extracted/`（boot_firmware / src / decompiled / old_kernel_modules / LCD-show / xorg_config / switch_scripts），`MANIFEST.md` 逐条说明来源与用途。
+- 用 `dtc` 把 `mhs35.dtbo` 反编译，重建可编译 `src/mhs35-overlay.dts` 并编译出 `mhs35-rebuild.dtbo`：`__fixups__` 指向 `spi0`/`gpio`，init 序列逐字节一致（已 diff 验证）。
+- 新系统**未被改动**。安装步骤写入 `MANIFEST.md`，等用户确认（`need_user.md` Q2 第二块屏是什么、Q3 安装授权）。

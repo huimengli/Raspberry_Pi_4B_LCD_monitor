@@ -1,0 +1,675 @@
+/dts-v1/;
+
+/ {
+	compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "sitronix,st7735r";
+			spi-max-frequency = <0x1e84800>;
+			gamma = "02 1c 07 12 37 32 29 2d 29 25 2B 39 00 01 03 10\n03 1d 07 06 2E 2C 29 2D 2E 2E 37 3F 00 00 02 10";
+		};
+	};
+
+	fragment@1 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "himax,hx8340bn";
+			spi-max-frequency = <0x1e84800>;
+			buswidth = <0x09>;
+			bgr;
+		};
+	};
+
+	fragment@2 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9340";
+			spi-max-frequency = <0x1e84800>;
+			bgr;
+		};
+	};
+
+	fragment@3 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9341";
+			spi-max-frequency = <0x1e84800>;
+			bgr;
+		};
+	};
+
+	fragment@4 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "solomon,ssd1306";
+			spi-max-frequency = <0xf42400>;
+		};
+	};
+
+	fragment@5 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "sitronix,st7789v";
+			spi-max-frequency = <0x2dc6c00>;
+			init = <0x1000011 0x2000078 0x100003a 0x05 0x10000b2 0x0c 0x0c 0x00 0x33 0x33 0x10000b7 0x35 0x10000c2 0x01 0xff 0x10000c3 0x17 0x10000c4 0x20 0x10000bb 0x17 0x10000c5 0x20 0x10000d0 0xa4 0xa1 0x1000029>;
+			gamma = "D0 00 14 15 13 2C 42 43 4E 09 16 14 18 21\nD0 00 14 15 13 0B 43 55 53 0C 17 14 23 20";
+		};
+	};
+
+	fragment@6 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "UltraChip,uc1701";
+			spi-max-frequency = <0x7a1200>;
+			bgr;
+		};
+	};
+
+	fragment@7 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "raio,ra8875";
+			spi-max-frequency = <0x4c4b40>;
+			spi-cpha;
+			spi-cpol;
+			width = <0x1e0>;
+			height = <0x110>;
+			bgr;
+		};
+	};
+
+	fragment@8 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "raio,ra8875";
+			spi-max-frequency = <0x4c4b40>;
+			spi-cpha;
+			spi-cpol;
+			width = <0x320>;
+			height = <0x1e0>;
+			bgr;
+		};
+	};
+
+	fragment@9 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ultrachip,uc1611";
+			spi-max-frequency = <0x1e84800>;
+			spi-cpha;
+			spi-cpol;
+		};
+	};
+
+	fragment@10 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ultrachip,uc1611";
+			spi-max-frequency = <0x1e84800>;
+			spi-cpha;
+			spi-cpol;
+			buswidth = <0x09>;
+		};
+	};
+
+	fragment@11 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "solomon,ssd1351";
+			spi-max-frequency = <0x1312d00>;
+			backlight = <0x02>;
+			bgr;
+		};
+	};
+
+	fragment@12 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9320";
+			spi-max-frequency = <0x1e84800>;
+			spi-cpha;
+			spi-cpol;
+			startbyte = <0x70>;
+			bgr;
+		};
+	};
+
+	fragment@13 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9325";
+			spi-max-frequency = <0x2dc6c00>;
+			spi-cpha;
+			spi-cpol;
+			init = <0x10000e7 0x10 0x1000000 0x01 0x1000001 0x100 0x1000002 0x700 0x1000003 0x1030 0x1000004 0x00 0x1000008 0x207 0x1000009 0x00 0x100000a 0x00 0x100000c 0x01 0x100000d 0x00 0x100000f 0x00 0x1000010 0x00 0x1000011 0x07 0x1000012 0x00 0x1000013 0x00 0x2000032 0x1000010 0x1590 0x1000011 0x227 0x2000032 0x1000012 0x9c 0x2000032 0x1000013 0x1900 0x1000029 0x23 0x100002b 0x0e 0x2000032 0x1000020 0x00 0x1000021 0x00 0x2000032 0x1000050 0x00 0x1000051 0xef 0x1000052 0x00 0x1000053 0x13f 0x1000060 0xa700 0x1000061 0x01 0x100006a 0x00 0x1000080 0x00 0x1000081 0x00 0x1000082 0x00 0x1000083 0x00 0x1000084 0x00 0x1000085 0x00 0x1000090 0x10 0x1000092 0x00 0x1000093 0x03 0x1000095 0x110 0x1000097 0x00 0x1000098 0x00 0x1000007 0x133 0x1000020 0x00 0x1000021 0x00 0x2000064>;
+			startbyte = <0x70>;
+			bgr;
+			fps = <0x32>;
+			gamma = "04 1F 4 7 7 0 7 7 6 0\n0F 00 1 7 4 0 0 0 6 7";
+		};
+	};
+
+	fragment@14 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9325";
+			spi-max-frequency = <0x1e84800>;
+			bgr;
+		};
+	};
+
+	fragment@15 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "himax,hx8347d";
+			spi-max-frequency = <0x1e84800>;
+			startbyte = <0x70>;
+			bgr;
+		};
+	};
+
+	fragment@16 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9341";
+			spi-max-frequency = <0x1e84800>;
+			buswidth = <0x09>;
+			bgr;
+		};
+	};
+
+	fragment@17 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "philips,pcd8544";
+			spi-max-frequency = <0x61a80>;
+		};
+	};
+
+	fragment@18 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "teralane,tls8204";
+			spi-max-frequency = <0xf4240>;
+		};
+	};
+
+	fragment@19 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9163";
+			spi-max-frequency = <0xb71b00>;
+			bgr;
+		};
+	};
+
+	fragment@20 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9486";
+			spi-max-frequency = <0x1e84800>;
+			regwidth = <0x10>;
+			bgr;
+		};
+	};
+
+	fragment@21 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9340";
+			spi-max-frequency = <0x1e84800>;
+			init = <0x1000001 0x2000005 0x1000028 0x10000ef 0x03 0x80 0x02 0x10000cf 0x00 0xc1 0x30 0x10000ed 0x64 0x03 0x12 0x81 0x10000e8 0x85 0x00 0x78 0x10000cb 0x39 0x2c 0x00 0x34 0x02 0x10000f7 0x20 0x10000ea 0x00 0x00 0x10000c0 0x23 0x10000c1 0x10 0x10000c5 0x3e 0x28 0x10000c7 0x86 0x100003a 0x55 0x10000b1 0x00 0x18 0x10000b6 0x08 0x82 0x27 0x10000f2 0x00 0x1000026 0x01 0x10000e0 0x0f 0x31 0x2b 0x0c 0x0e 0x08 0x4e 0xf1 0x37 0x07 0x10 0x03 0x0e 0x09 0x00 0x10000e1 0x00 0x0e 0x14 0x03 0x11 0x07 0x31 0xc1 0x48 0x08 0x0f 0x0c 0x31 0x36 0x0f 0x1000011 0x2000064 0x1000029 0x2000014>;
+			bgr;
+		};
+	};
+
+	fragment@22 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "solomon,ssd1351";
+			spi-max-frequency = <0x1312d00>;
+			bgr;
+			gamma = "0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4";
+		};
+	};
+
+	fragment@23 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9341";
+			spi-max-frequency = <0x1e84800>;
+			bgr;
+		};
+	};
+
+	fragment@24 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "sitronix,st7735r";
+			spi-max-frequency = <0x1e84800>;
+		};
+	};
+
+	fragment@25 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "solomon,ssd1289";
+			spi-max-frequency = <0xf42400>;
+			bgr;
+		};
+	};
+
+	fragment@26 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "neosec,tinylcd";
+			spi-max-frequency = <0x1e84800>;
+			bgr;
+		};
+	};
+
+	fragment@27 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9341";
+			spi-max-frequency = <0x1e84800>;
+			bgr;
+		};
+	};
+
+	fragment@28 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9481";
+			spi-max-frequency = <0x7a12000>;
+			spi-cpha;
+			spi-cpol;
+			bgr;
+		};
+	};
+
+	fragment@29 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9486";
+			spi-max-frequency = <0x7a12000>;
+			spi-cpha;
+			spi-cpol;
+			bgr;
+		};
+	};
+
+	fragment@30 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "ilitek,ili9340";
+			spi-max-frequency = <0x2dc6c00>;
+			init = <0x10000cb 0x39 0x2c 0x00 0x34 0x02 0x10000cf 0x00 0xc1 0x30 0x10000e8 0x85 0x00 0x78 0x10000ea 0x00 0x00 0x10000ed 0x64 0x03 0x12 0x81 0x10000f7 0x20 0x10000c0 0x23 0x10000c1 0x10 0x10000c5 0x3e 0x28 0x10000c7 0x86 0x1000036 0x28 0x100003a 0x55 0x10000b1 0x00 0x18 0x10000b6 0x08 0x82 0x27 0x10000f2 0x00 0x1000026 0x01 0x10000e0 0x0f 0x31 0x2b 0x0c 0x0e 0x08 0x4e 0xf1 0x37 0x07 0x10 0x03 0x0e 0x09 0x00 0x10000e1 0x00 0x0e 0x14 0x03 0x11 0x07 0x31 0xc1 0x48 0x08 0x0f 0x0c 0x31 0x36 0x0f 0x1000011 0x2000078 0x1000029 0x100002c>;
+			bgr;
+		};
+	};
+
+	fragment@31 {
+		target = <0x01>;
+
+		__dormant__ {
+			compatible = "hitachi,bd663474";
+			spi-max-frequency = <0x1e84800>;
+			spi-cpha;
+			spi-cpol;
+		};
+	};
+
+	fragment@100 {
+		target-path = "spi0/spidev@0";
+		phandle = <0x03>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@101 {
+		target = <0xffffffff>;
+		phandle = <0x02>;
+
+		__overlay__ {
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+			status = "okay";
+
+			display@0 {
+				reg = <0x00>;
+				spi-max-frequency = <0x1e84800>;
+				fps = <0x1e>;
+				buswidth = <0x08>;
+				phandle = <0x01>;
+			};
+		};
+	};
+
+	__overrides__ {
+		spi0-0 = <0x02 0x74617267 0x65743a30 0x3d00ffff 0xffff0000 0x37461 0x72676574 0x2d706174 0x683d7370 0x69302f73 0x70696465 0x76403000 0x01 0x7265673a 0x303d3000>;
+		spi0-1 = <0x02 0x74617267 0x65743a30 0x3d00ffff 0xffff0000 0x37461 0x72676574 0x2d706174 0x683d7370 0x69302f73 0x70696465 0x76403100 0x01 0x7265673a 0x303d3100>;
+		spi1-0 = <0x02 0x74617267 0x65743a30 0x3d00ffff 0xffff0000 0x37461 0x72676574 0x2d706174 0x683d7370 0x69312f73 0x70696465 0x76403000 0x01 0x7265673a 0x303d3000>;
+		spi1-1 = <0x02 0x74617267 0x65743a30 0x3d00ffff 0xffff0000 0x37461 0x72676574 0x2d706174 0x683d7370 0x69312f73 0x70696465 0x76403100 0x01 0x7265673a 0x303d3100>;
+		spi1-2 = <0x02 0x74617267 0x65743a30 0x3d00ffff 0xffff0000 0x37461 0x72676574 0x2d706174 0x683d7370 0x69312f73 0x70696465 0x76403200 0x01 0x7265673a 0x303d3200>;
+		spi2-0 = <0x02 0x74617267 0x65743a30 0x3d00ffff 0xffff0000 0x37461 0x72676574 0x2d706174 0x683d7370 0x69322f73 0x70696465 0x76403000 0x01 0x7265673a 0x303d3000>;
+		spi2-1 = <0x02 0x74617267 0x65743a30 0x3d00ffff 0xffff0000 0x37461 0x72676574 0x2d706174 0x683d7370 0x69322f73 0x70696465 0x76403100 0x01 0x7265673a 0x303d3100>;
+		spi2-2 = <0x02 0x74617267 0x65743a30 0x3d00ffff 0xffff0000 0x37461 0x72676574 0x2d706174 0x683d7370 0x69322f73 0x70696465 0x76403200 0x01 0x7265673a 0x303d3200>;
+		speed = <0x01 0x7370692d 0x6d61782d 0x66726571 0x75656e63 0x793a3000>;
+		cpha = [00 00 00 01 73 70 69 2d 63 70 68 61 3f 00];
+		cpol = [00 00 00 01 73 70 69 2d 63 70 6f 6c 3f 00];
+		adafruit18 = [00 00 00 00 2b 30 00];
+		adafruit22 = [00 00 00 00 2b 31 00];
+		adafruit22a = [00 00 00 00 2b 32 00];
+		adafruit28 = [00 00 00 00 2b 33 00];
+		adafruit13m = [00 00 00 00 2b 34 00];
+		admatec_c-berry28 = [00 00 00 00 2b 35 00];
+		dogs102 = [00 00 00 00 2b 36 00];
+		er_tftm050_2 = [00 00 00 00 2b 37 00];
+		er_tftm070_5 = [00 00 00 00 2b 38 00];
+		ew24ha0 = [00 00 00 00 2b 39 00];
+		ew24ha0_9bit = <0x00 0x2b313000>;
+		freetronicsoled128 = <0x00 0x2b313100>;
+		hy28a = <0x00 0x2b313200>;
+		hy28b = <0x00 0x2b313300>;
+		itdb28_spi = <0x00 0x2b313400>;
+		mi0283qt-2 = <0x00 0x2b313500>;
+		mi0283qt-9a = <0x00 0x2b313600>;
+		nokia3310 = <0x00 0x2b313700>;
+		nokia3310a = <0x00 0x2b313800>;
+		nokia5110 = <0x00 0x2b313900>;
+		piscreen = <0x00 0x2b323000>;
+		pitft = <0x00 0x2b323100>;
+		pioled = <0x00 0x2b323200>;
+		rpi-display = <0x00 0x2b323300>;
+		sainsmart18 = <0x00 0x2b323400>;
+		sainsmart32_spi = <0x00 0x2b323500>;
+		tinylcd35 = <0x00 0x2b323600>;
+		tm022hdh26 = <0x00 0x2b323700>;
+		tontec35_9481 = <0x00 0x2b323800>;
+		tontec35_9486 = <0x00 0x2b323900>;
+		waveshare32b = <0x00 0x2b333000>;
+		waveshare22 = <0x00 0x2b333100>;
+		bd663474 = <0x01 0x636f6d70 0x61746962 0x6c653d68 0x69746163 0x68692c62 0x64363633 0x34373400>;
+		hx8340bn = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 68 69 6d 61 78 2c 68 78 38 33 34 30 62 6e 00];
+		hx8347d = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 68 69 6d 61 78 2c 68 78 38 33 34 37 64 00];
+		hx8353d = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 68 69 6d 61 78 2c 68 78 38 33 35 33 64 00];
+		hx8357d = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 68 69 6d 61 78 2c 68 78 38 33 35 37 64 00];
+		ili9163 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 69 6c 69 74 65 6b 2c 69 6c 69 39 31 36 33 00];
+		ili9320 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 69 6c 69 74 65 6b 2c 69 6c 69 39 33 32 30 00];
+		ili9325 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 69 6c 69 74 65 6b 2c 69 6c 69 39 33 32 35 00];
+		ili9340 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 69 6c 69 74 65 6b 2c 69 6c 69 39 33 34 30 00];
+		ili9341 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 69 6c 69 74 65 6b 2c 69 6c 69 39 33 34 31 00];
+		ili9481 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 69 6c 69 74 65 6b 2c 69 6c 69 39 34 38 31 00];
+		ili9486 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 69 6c 69 74 65 6b 2c 69 6c 69 39 34 38 36 00];
+		pcd8544 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 70 68 69 6c 69 70 73 2c 70 63 64 38 35 34 34 00];
+		ra8875 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 72 61 69 6f 2c 72 61 38 38 37 35 00];
+		s6d02a1 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 61 6d 73 75 6e 67 2c 73 36 64 30 32 61 31 00];
+		s6d1121 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 61 6d 73 75 6e 67 2c 73 36 64 31 31 32 31 00];
+		seps525 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 79 6e 63 6f 61 6d 2c 73 65 70 73 35 32 35 00];
+		sh1106 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 69 6e 6f 77 65 61 6c 74 68 2c 73 68 31 31 30 36 00];
+		ssd1289 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 6f 6c 6f 6d 6f 6e 2c 73 73 64 31 32 38 39 00];
+		ssd1305 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 6f 6c 6f 6d 6f 6e 2c 73 73 64 31 33 30 35 00];
+		ssd1306 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 6f 6c 6f 6d 6f 6e 2c 73 73 64 31 33 30 36 00];
+		ssd1325 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 6f 6c 6f 6d 6f 6e 2c 73 73 64 31 33 32 35 00];
+		ssd1331 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 6f 6c 6f 6d 6f 6e 2c 73 73 64 31 33 33 31 00];
+		ssd1351 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 73 6f 6c 6f 6d 6f 6e 2c 73 73 64 31 33 35 31 00];
+		st7735r = <0x01 0x636f6d70 0x61746962 0x6c653d73 0x6974726f 0x6e69782c 0x73743737 0x33357200>;
+		st7789v = <0x01 0x636f6d70 0x61746962 0x6c653d73 0x6974726f 0x6e69782c 0x73743737 0x38397600>;
+		tls8204 = <0x01 0x636f6d70 0x61746962 0x6c653d74 0x6572616c 0x616e652c 0x746c7338 0x32303400>;
+		uc1611 = <0x01 0x636f6d70 0x61746962 0x6c653d75 0x6c747261 0x63686970 0x2c756331 0x36313100>;
+		uc1701 = <0x01 0x636f6d70 0x61746962 0x6c653d55 0x6c747261 0x43686970 0x2c756331 0x37303100>;
+		upd161704 = [00 00 00 01 63 6f 6d 70 61 74 69 62 6c 65 3d 6e 65 63 2c 75 70 64 31 36 31 37 30 34 00];
+		width = <0x01 0x77696474 0x683a3000>;
+		height = [00 00 00 01 68 65 69 67 68 74 3a 30 00];
+		regwidth = [00 00 00 01 72 65 67 77 69 64 74 68 3a 30 00];
+		buswidth = [00 00 00 01 62 75 73 77 69 64 74 68 3a 30 00];
+		debug = <0x01 0x64656275 0x673a3000>;
+		rotate = [00 00 00 01 72 6f 74 61 74 65 3a 30 00];
+		bgr = [00 00 00 01 62 67 72 3f 00];
+		fps = [00 00 00 01 66 70 73 3a 30 00];
+		txbuflen = [00 00 00 01 74 78 62 75 66 6c 65 6e 3a 30 00];
+		startbyte = <0x01 0x73746172 0x74627974 0x653a3000>;
+		gamma = [00 00 00 01 67 61 6d 6d 61 00];
+		reset_pin = [00 00 00 01 72 65 73 65 74 2d 67 70 69 6f 73 3a 30 3d 00 ff ff ff ff 00 00 00 01 72 65 73 65 74 2d 67 70 69 6f 73 3a 34 00 00 00 00 01 72 65 73 65 74 2d 67 70 69 6f 73 3a 38 3d 31 00];
+		dc_pin = <0x01 0x64632d67 0x70696f73 0x3a303d00 0xffffffff 0x01 0x64632d67 0x70696f73 0x3a340000 0x164 0x632d6770 0x696f733a 0x383d3000>;
+		led_pin = [00 00 00 01 6c 65 64 2d 67 70 69 6f 73 3a 30 3d 00 ff ff ff ff 00 00 00 01 6c 65 64 2d 67 70 69 6f 73 3a 34 00 00 00 00 01 6c 65 64 2d 67 70 69 6f 73 3a 38 3d 30 00];
+	};
+
+	__symbols__ {
+		spidev_fragment = "/fragment@100";
+		display_fragment = "/fragment@101";
+		display = "/fragment@101/__overlay__/display@0";
+	};
+
+	__fixups__ {
+		spi0 = "/fragment@101:target:0", "/__overrides__:spi0-0:14", "/__overrides__:spi0-1:14";
+		spi1 = "/__overrides__:spi1-0:14", "/__overrides__:spi1-1:14", "/__overrides__:spi1-2:14";
+		spi2 = "/__overrides__:spi2-0:14", "/__overrides__:spi2-1:14", "/__overrides__:spi2-2:14";
+		gpio = "/__overrides__:reset_pin:19", "/__overrides__:dc_pin:16", "/__overrides__:led_pin:17";
+	};
+
+	__local_fixups__ {
+
+		fragment@0 {
+			target = <0x00>;
+		};
+
+		fragment@1 {
+			target = <0x00>;
+		};
+
+		fragment@2 {
+			target = <0x00>;
+		};
+
+		fragment@3 {
+			target = <0x00>;
+		};
+
+		fragment@4 {
+			target = <0x00>;
+		};
+
+		fragment@5 {
+			target = <0x00>;
+		};
+
+		fragment@6 {
+			target = <0x00>;
+		};
+
+		fragment@7 {
+			target = <0x00>;
+		};
+
+		fragment@8 {
+			target = <0x00>;
+		};
+
+		fragment@9 {
+			target = <0x00>;
+		};
+
+		fragment@10 {
+			target = <0x00>;
+		};
+
+		fragment@11 {
+			target = <0x00>;
+		};
+
+		fragment@12 {
+			target = <0x00>;
+		};
+
+		fragment@13 {
+			target = <0x00>;
+		};
+
+		fragment@14 {
+			target = <0x00>;
+		};
+
+		fragment@15 {
+			target = <0x00>;
+		};
+
+		fragment@16 {
+			target = <0x00>;
+		};
+
+		fragment@17 {
+			target = <0x00>;
+		};
+
+		fragment@18 {
+			target = <0x00>;
+		};
+
+		fragment@19 {
+			target = <0x00>;
+		};
+
+		fragment@20 {
+			target = <0x00>;
+		};
+
+		fragment@21 {
+			target = <0x00>;
+		};
+
+		fragment@22 {
+			target = <0x00>;
+		};
+
+		fragment@23 {
+			target = <0x00>;
+		};
+
+		fragment@24 {
+			target = <0x00>;
+		};
+
+		fragment@25 {
+			target = <0x00>;
+		};
+
+		fragment@26 {
+			target = <0x00>;
+		};
+
+		fragment@27 {
+			target = <0x00>;
+		};
+
+		fragment@28 {
+			target = <0x00>;
+		};
+
+		fragment@29 {
+			target = <0x00>;
+		};
+
+		fragment@30 {
+			target = <0x00>;
+		};
+
+		fragment@31 {
+			target = <0x00>;
+		};
+
+		__overrides__ {
+			spi0-0 = <0x00 0x12 0x30>;
+			spi0-1 = <0x00 0x12 0x30>;
+			spi1-0 = <0x00 0x12 0x30>;
+			spi1-1 = <0x00 0x12 0x30>;
+			spi1-2 = <0x00 0x12 0x30>;
+			spi2-0 = <0x00 0x12 0x30>;
+			spi2-1 = <0x00 0x12 0x30>;
+			spi2-2 = <0x00 0x12 0x30>;
+			speed = <0x00>;
+			cpha = <0x00>;
+			cpol = <0x00>;
+			bd663474 = <0x00>;
+			hx8340bn = <0x00>;
+			hx8347d = <0x00>;
+			hx8353d = <0x00>;
+			hx8357d = <0x00>;
+			ili9163 = <0x00>;
+			ili9320 = <0x00>;
+			ili9325 = <0x00>;
+			ili9340 = <0x00>;
+			ili9341 = <0x00>;
+			ili9481 = <0x00>;
+			ili9486 = <0x00>;
+			pcd8544 = <0x00>;
+			ra8875 = <0x00>;
+			s6d02a1 = <0x00>;
+			s6d1121 = <0x00>;
+			seps525 = <0x00>;
+			sh1106 = <0x00>;
+			ssd1289 = <0x00>;
+			ssd1305 = <0x00>;
+			ssd1306 = <0x00>;
+			ssd1325 = <0x00>;
+			ssd1331 = <0x00>;
+			ssd1351 = <0x00>;
+			st7735r = <0x00>;
+			st7789v = <0x00>;
+			tls8204 = <0x00>;
+			uc1611 = <0x00>;
+			uc1701 = <0x00>;
+			upd161704 = <0x00>;
+			width = <0x00>;
+			height = <0x00>;
+			regwidth = <0x00>;
+			buswidth = <0x00>;
+			debug = <0x00>;
+			rotate = <0x00>;
+			bgr = <0x00>;
+			fps = <0x00>;
+			txbuflen = <0x00>;
+			startbyte = <0x00>;
+			gamma = <0x00>;
+			reset_pin = <0x00 0x17 0x29>;
+			dc_pin = <0x00 0x14 0x23>;
+			led_pin = <0x00 0x15 0x25>;
+		};
+	};
+};
