@@ -1,5 +1,6 @@
 # 临时与缓存产物
 tmp/
+drivers_extracted/drivers_extracted/
 *.log
 *.tmp
 .DS_Store
