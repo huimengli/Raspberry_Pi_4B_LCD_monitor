@@ -19,3 +19,9 @@
 - 提取 230 个文件到 `drivers_extracted/`（boot_firmware / src / decompiled / old_kernel_modules / LCD-show / xorg_config / switch_scripts），`MANIFEST.md` 逐条说明来源与用途。
 - 用 `dtc` 把 `mhs35.dtbo` 反编译，重建可编译 `src/mhs35-overlay.dts` 并编译出 `mhs35-rebuild.dtbo`：`__fixups__` 指向 `spi0`/`gpio`，init 序列逐字节一致（已 diff 验证）。
 - 新系统**未被改动**。安装步骤写入 `MANIFEST.md`，等用户确认（`need_user.md` Q2 第二块屏是什么、Q3 安装授权）。
+
+## Git 提交记录
+
+- `1743872` feat(AI): 提取老系统针接口双屏驱动与配置到工作区（215 个文件）
+  - 已本地 commit，**未 push**（本仓库无远程地址）
+  - 过程 hash：`c766bdb` → `a2e9ce7` → `df598c9` → `1743872`（amend 修正嵌入 git 仓库与 tree.md）

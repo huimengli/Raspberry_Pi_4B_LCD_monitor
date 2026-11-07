@@ -63,6 +63,8 @@ drivers_extracted/
 │   └── spi/                spi-bcm2835.ko
 ├── LCD-show/               goodtft/LCD-show 安装包（来源 /media/huimengli/rootfs/home/pi/LCD-show，上游 https://github.com/goodtft/LCD-show.git；已删除副本内的 .git，避免与本仓库嵌套）
 │   ├── MHS35-show          老系统实际执行过的安装脚本（拷贝 overlay、写 config.txt、装 fbcp、装 evdev）
+│   ├── rpi-fbcp/           fbcp 源码（上游 https://github.com/tasanakorn/rpi-fbcp；已删除副本内的 .git）
+│   └── build/              2020-12-04 的 32 位 armhf 构建产物（含 fbcp 二进制）
 │   └── usr/                各屏 overlay .dtb（mhs35/mhs35b/mhs24/mhs32/mhs395/mis35/tft35a/tft9341/qddpi24）、fbcp 32 位二进制、calibration/fbturbo 配置、.deb（armhf）
 ├── xorg_config/            老系统实际安装的 X11/自启配置（99-calibration.conf, 99-fbturbo.conf, 45-evdev.conf, 10-evdev.conf, rc.local）
 └── switch_scripts/         home/pi/Desktop/Item/显示器输出/*.sh（8 个 config 切换脚本）
