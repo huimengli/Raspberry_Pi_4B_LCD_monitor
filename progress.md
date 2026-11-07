@@ -37,3 +37,10 @@
 - 已验证运行内核 DT 有 `spi@7e204000`(spi0) 与 `gpio@7e200000`，overlay `__fixups__` 目标存在。
 - 新系统仍未改动；安装需用户在终端 `sudo bash drivers_extracted/apply/install_mhs35.sh`。
 - 新增 Q4（第二块屏/HDMI 实际分辨率档位）、Q5（KMS 下"同内容"实现方案选择）→ `need_user.md`。
+## 2026-11-07-15-30 会话 4：首次安装后诊断，修复脚本 bug
+
+- 用户执行了安装+重启。诊断结果：`mhs35.dtbo` 已进 `/boot/firmware/overlays/`，但 `config.txt`(1272B)/`cmdline.txt`(214B) **未被修改**，`spi@7e204000` status=`disabled`，无 `fb1`/`spidev`，`dmesg` 无 fbtft，小屏纯白（符合预期：无驱动）。
+- 根因与修复见 `hard_bug.md` BUG-1（vfat 上 `cp -a` 失败 + `set -e` 中断；备份路径拼接重复）。已把备份复制回 `drivers_extracted/backup_new_system/`（校验和已核对，等于新系统原文件）。
+- `install_mhs35.sh`/`revert_mhs35.sh` 重写（普通 `cp` 写 vfat、`W` 定位工作区、`set -euo pipefail`、写后 grep 校验），`bash -n` 通过。
+- 待用户在终端重跑 `sudo bash drivers_extracted/apply/install_mhs35.sh` + `sudo reboot`，再 `bash drivers_extracted/apply/verify_mhs35.sh`。
+- 新系统 `config.txt` 仍未改动（overlay 文件已新增，可回退）。
