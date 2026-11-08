@@ -153,7 +153,9 @@
   drivers_extracted/apply/touch_calibrate.sh
   drivers_extracted/apply/verify_mhs35.sh
   drivers_extracted/backup_new_system/cmdline.txt.2026-11-07-15-14-35.bak
+  drivers_extracted/backup_new_system/cmdline.txt.2026-11-07-15-47-28.bak
   drivers_extracted/backup_new_system/config.txt.2026-11-07-15-14-35.bak
+  drivers_extracted/backup_new_system/config.txt.2026-11-07-15-47-28.bak
   drivers_extracted/boot_firmware/cmdline.txt
   drivers_extracted/boot_firmware/config.txt
   drivers_extracted/boot_firmware/config1080p.bak
