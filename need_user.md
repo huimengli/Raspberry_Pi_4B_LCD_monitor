@@ -49,3 +49,13 @@
 
 - Q4（HDMI 分辨率档位）：仍 wait。当前用 1280x720。
 - Q5（KMS 下两块屏显示相同内容）：仍 wait。已确认 labwc 只渲染 DRM 输出；可行方向是小屏跑独立 fbdev/X 会话，或程序直接画 /dev/fb1。
+## Q5 状态更新（2026-11-08-22-24）
+
+- 用户答复：「小屏幕我暂时没想好，能不能做个切换的sh，允许执行并显示 getInfoCN.py 或显示 html 相同内容」
+- 已实现 drivers_extracted/apply/switch_small_screen.sh：info / html / image / fill / stop / status（直接写 /dev/fb1，绕过 X/Wayland，不涉及触摸冲突）
+- 需要：用户真机 sudo 试用后反馈；若要「两块屏相同内容」，HDMI 侧同时跑同一程序（info 模式让 HDMI 控制台也打印，或 html 模式两边同页）
+
+## Q6 状态更新（2026-11-08-22-24）
+
+- 用户反馈：fix_touch_keyboard.sh（mouseEmulation→no）执行后仍然弹触摸键盘 → 弹出者不是 labwc 鼠标模拟路径
+- 需要：键盘外观/标题栏，或弹出时打开的程序；可执行 sudo ps -eo comm | grep -iE 'kbd|keyboard|wvkbd' 看进程名

@@ -56,3 +56,12 @@
 - 系统未安装 wvkbd/onboard 等 OSK（apt-cache 有 wvkbd，未安装）；弹键盘的具体程序待用户确认（Q6）。
 - 新增 apply/fix_touch_keyboard.sh（mouseEmulation 改 no，带备份与回退，killall -SIGHUP labwc）与 apply/fb1_test.sh（向 /dev/fb1 写 RGB565 单色图案验证屏）。均 bash -n 通过。
 - Q4（HDMI 分辨率档位）与 Q5（KMS 下同内容方案）仍 wait；新增 Q6。
+## 2026-11-08-22-24 会话 6：小屏内容切换工具（getInfoCN.py / HTML）
+
+- 用户答复：fix_touch_keyboard.sh 已执行，触摸键盘仍弹出（Q6 未解，需用户告知键盘来源程序）；小屏需求明确为「做个切换脚本，可显示 getInfoCN.py 或显示 HTML 相同内容」。
+- 读 /home/huimengli/getInfoCN.py（97 行）：纯文本程序，clear + print + sleep 1 循环，无 X/Wayland 依赖。
+- 方案：不碰 X/Wayland，直接向 /dev/fb1 写 RGB565 像素。新增 apply/fb1_draw.py（文本/图片/纯色 → fb1）与 apply/switch_small_screen.sh（info/html/image/fill/stop/status）。
+- 字体坑：DroidSansFallbackFull.ttf 有 CJK 但缺拉丁数字（预览出现豆腐块）→ 改为按字符分段，CJK 用 Droid、拉丁用 DejaVuSans，预览已确认正常（tmp/preview_info2.png）。
+- 验证：chromium --headless=new --window-size=480,320 --screenshot 产出 480x320 PNG（tmp/fb1_html.png，中文正常）；fb1 写入字节数 307200 = 480*320*2 匹配。
+- 抓取 getInfoCN 输出用 timeout 1 python3 app（对 print→sleep 循环有效，沙箱内验证机制可用，vcgencmd/top 在沙箱受限属正常）。
+- 脚本 bash -n 通过；写 /dev/fb1 需 root，由用户 sudo 执行。

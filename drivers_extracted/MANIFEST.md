@@ -124,3 +124,11 @@ e74a7a85f1046f3ce379124d0934faee  boot_firmware/cmdline.txt
 - `apply/touch_calibrate.sh`：X 下触摸矩阵校准提示（老标定值 `3936 227 268 3880` + `SwapAxes=1` 是 rotate 90 标定的，rotate 270 下需重标）
 - 已验证运行内核 DT 存在 overlay 目标：`/sys/firmware/devicetree/base/soc/spi@7e204000`（spi0）与 `gpio@7e200000`，`__fixups__` 的 `spi0`/`gpio` 可解析
 - 限制：本会话 `sudo` 被 `no new privileges` 阻止，`/boot/firmware` 只读，安装命令**必须由用户在终端执行**
+## 小屏显示与交互脚本（2026-11-08 追加）
+
+- `apply/fix_touch_keyboard.sh`：把 `~/.config/labwc/rc.xml` 的 `mouseEmulation` 由 yes 改 no（RPi OS 的 `/usr/bin/autotouch` 会在检测到触摸设备时自动写入该行，`rc.bak` 为其自动备份），并 `killall -s SIGHUP labwc` 重载。
+- `apply/fb1_test.sh`：向 `/dev/fb1` 写 RGB565 单色图案（red/green/blue/black/white）验证屏与驱动链路，需 sudo。
+- `apply/fb1_draw.py`：把文本 / 图片 / 纯色渲染成 480x320 RGB565 写入 `/dev/fb1`；中文用 `DroidSansFallbackFull.ttf`、拉丁与数字用 `DejaVuSans.ttf` 按字符分段渲染（单一 Droid 字体缺拉丁字形，会出现豆腐块）。`--out preview.png` 可离线预览。
+- `apply/switch_small_screen.sh`：小屏内容切换，子命令 `info`（跑 `getInfoCN.py` 抓取输出，每 N 秒刷新）/ `html <文件或URL>`（chromium `--headless=new --window-size=480,320 --screenshot` 截图后写屏）/ `image <png>` / `fill <颜色>` / `stop`（清屏交还控制台）/ `status`。需 sudo（写 `/dev/fb1`）。
+- 依赖：`python3-pil`（已装 11.1.0）、`chromium`（已装 154.0.8037）、`DejaVuSans.ttf`、`DroidSansFallbackFull.ttf`；`python3-evdev` 未装（本方案不需要）。
+- 已验证：文本渲染预览（`tmp/preview_info2.png`）、chromium 截图链路（`tmp/fb1_html.png`，480x320）、fb1 字节流 307200 = 480×320×2。真机写屏需用户 sudo 执行。

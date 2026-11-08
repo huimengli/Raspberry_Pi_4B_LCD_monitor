@@ -14,5 +14,7 @@
 - [x] 2026-11-08-21-44 诊断小屏黑屏（fb1=控制台）与触摸键盘弹出（autotouch 写 mouseEmulation=yes） (→ records/2026-11-07-12-16-48.md)
 - [ ] 2026-11-08-21-44 用户执行 fix_touch_keyboard.sh 消除键盘弹出，并确认弹出程序 Q6 (→ records/2026-11-07-12-16-48.md)
 - [ ] 2026-11-07-15-30 用户 sudo rm -r drivers_extracted/drivers_extracted/（root 属主清理） (→ records/2026-11-07-12-16-48.md)
-- [ ] 2026-11-07-14-17 选定 KMS 下"同内容"实现方案（Q5），实现双屏镜像 (→ records/2026-11-07-12-16-48.md)
+- [x] 2026-11-08-22-24 实现小屏切换脚本 fb1_draw.py + switch_small_screen.sh（info/html/image/fill/stop） (→ records/2026-11-07-12-16-48.md)
+- [ ] 2026-11-08-22-24 用户真机试用 switch_small_screen.sh（需 sudo），反馈效果 (→ records/2026-11-07-12-16-48.md)
+- [ ] 2026-11-08-22-24 确定双屏「相同内容」最终形态（HDMI 侧同步方案） (→ records/2026-11-07-12-16-48.md)
 - [ ] 2026-11-07-14-17 触摸校准（rotate 270 下重标） (→ records/2026-11-07-12-16-48.md)
