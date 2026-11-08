@@ -143,6 +143,8 @@
   drivers_extracted/LCD-show/xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb
   drivers_extracted/LCD-show/xserver-xorg-input-evdev_2.10.5-1_armhf.deb
   drivers_extracted/MANIFEST.md
+  drivers_extracted/apply/fb1_test.sh
+  drivers_extracted/apply/fix_touch_keyboard.sh
   drivers_extracted/apply/install_mhs35.sh
   drivers_extracted/apply/mhs35.dtbo
   drivers_extracted/apply/proposed_cmdline.txt

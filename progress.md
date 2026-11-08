@@ -46,3 +46,12 @@
 - `install_mhs35.sh`/`revert_mhs35.sh` 重写（普通 `cp` 写 vfat、`W` 定位工作区、`set -euo pipefail`、写后 grep 校验），`bash -n` 通过。
 - 待用户在终端重跑 `sudo bash drivers_extracted/apply/install_mhs35.sh` + `sudo reboot`，再 `bash drivers_extracted/apply/verify_mhs35.sh`。
 - 新系统 `config.txt` 仍未改动（overlay 文件已新增，可回退）。
+## 2026-11-08-21-44 会话 5：安装生效确认，处理触摸键盘与小屏显示
+
+- 用户重跑安装后 verify 结果：fb1 -> fb_ili9486 480x320 fps=31 @115MHz；ads7846 spi0.1 注册为 input9/event8。驱动侧完全成功。
+- /dev/spidev* 缺失是设计如此：mhs35 overlay 把 spidev@0/@1 设为 disabled，CS0/CS1 让给屏与触摸。
+- 小屏黑屏+光标 = fb1 是 Linux 控制台（fbcon=map:10，dmesg Console: switching to colour frame buffer device 480x135，vtcon1 bind=1）；labwc 只渲染 DRM 输出（HDMI-A-1/2），SPI 屏不是 DRM 输出，桌面画面永远不会出现在小屏。
+- 触摸键盘弹出根因：/etc/xdg/autostart/autotouch.desktop 调用 /usr/bin/autotouch，在「1 显示 + 1 触摸」时自动往 ~/.config/labwc/rc.xml 写入 touch 行（mouseEmulation=yes），diff 证实 rc.xml 比 rc.bak 只多这一行。点击文本框获得焦点触发屏幕键盘。
+- 系统未安装 wvkbd/onboard 等 OSK（apt-cache 有 wvkbd，未安装）；弹键盘的具体程序待用户确认（Q6）。
+- 新增 apply/fix_touch_keyboard.sh（mouseEmulation 改 no，带备份与回退，killall -SIGHUP labwc）与 apply/fb1_test.sh（向 /dev/fb1 写 RGB565 单色图案验证屏）。均 bash -n 通过。
+- Q4（HDMI 分辨率档位）与 Q5（KMS 下同内容方案）仍 wait；新增 Q6。
