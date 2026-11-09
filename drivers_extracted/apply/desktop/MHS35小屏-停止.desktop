@@ -3,7 +3,7 @@ Version=1.0
 Type=Application
 Name=MHS35小屏 停止
 Comment=小屏清屏，交还控制台
-Exec=/home/huimengli/Desktop/MHS35小屏切换.sh stop
+Exec=/home/huimengli/Desktop/run_stop.sh
 Icon=utilities-terminal
 Terminal=false
 

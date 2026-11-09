@@ -142,3 +142,10 @@ e74a7a85f1046f3ce379124d0934faee  boot_firmware/cmdline.txt
 - 修复要点：`info` 模式抓 `getInfoCN.py` 输出必须用 `python3 -u` + `timeout 3`，否则重定向到文件时是块缓冲，被 timeout 杀掉前不落盘，抓到 0 字节（实测抓到 864 字节，CPU 温度真实值）。
 - 限制：`Exec` 里不能有引号与 `&`（`desktop-file-validate` 报 reserved character），故用绝对路径 + 参数；首次双击需在文件管理器右键「Allow Launching」。
 - 首次安装版 `apply/switch_small_screen.sh`（sudo 版）保留作参考，日常用桌面版。
+## 桌面版修订（2026-11-09-10-56，针对用户四点反馈）
+
+- 问题①：`MHS35小屏-系统信息.desktop` 报「无法捕获内容」。根因：原 `info` 用 `timeout N python3 -u app` 抓输出，`getInfoCN.py` 是无限循环永不退出，每轮要等满 timeout，且抓空时只显示占位文字。改为 `capture_first_block()`：读到第一个 `---------` 信息块就 `terminate()`，每轮约 1 秒；抓不到时走内置生成器（`/proc/stat`+`/proc/meminfo`+`statvfs`+`vcgencmd`）。
+- 问题②：`CPU 使用 = %` 无数值。根因：`getInfoCN.py` 用 `top -n1 | awk '/Cpu\(s\):/ {print $2}'`，无 tty 时 top 报 `failed tty get`（实测），中文 locale 下字段位置不稳。改为脚本用 `/proc/stat` 两次采样求差值，并替换输出里的 CPU 行（实测 12.6%/24.5% 正常）。
+- 问题③：菜单太短显示不全。`zenity --list` 加 `--width=520 --height=360`，条目文案缩短。
+- 问题④（说明）：`html` 模式 = `chromium --headless=new --window-size=480,320 --screenshot` 把网页渲染成 480x320 PNG，再转 RGB565 写入 `/dev/fb1`；小屏得到的是**静态快照**，每 N 秒重拍一次，小屏上不能滚动/点击，动图与视频不会动。
+- 启动器改造：`lxterminal -e` 会吞掉 `脚本 参数` 里的参数，改为单 token 包装脚本 `run_menu.sh`/`run_info.sh`/`run_html.sh`/`run_stop.sh`，`.desktop` 的 `Exec` 只指向包装脚本，`desktop-file-validate` 全 OK。

@@ -76,3 +76,11 @@
 - 修掉两个真 bug：① `info` 抓输出用 `python3 -u` + `timeout 3`（重定向块缓冲导致抓到 0 字节），实测 864 字节含真实 CPU 温度；② `.desktop` 的 `Exec` 含引号与 `&` 被 validate 拒绝，改绝对路径+参数；另修 `[Desktop Entry]` 组头（首版写成注释）。
 - 清屏 trap 只挂在 info/html 循环里，避免 `fill`/`status` 退出时把刚画的颜色刷黑。
 - 限制记录：`top -n1` 在无 tty 的环境返回空（沙箱实测），从 lxterminal 启动的 info 模式不受影响。
+## 2026-11-09-10-57 会话 8：修复用户四点反馈（捕获、CPU 数值、菜单高度、截图说明）
+
+- ①系统信息启动器报「无法捕获内容」：原 `timeout N python3 -u app` 抓输出，`getInfoCN.py` 无限循环不退出，每轮等满 timeout，抓空只显示占位。改 `capture_first_block()`：读到第一个 `---------` 块即 `terminate()`（每轮约 1.0 秒，实测），抓不到走内置生成器。
+- ②`CPU 使用 = %` 空：根因是 `top -n1` 在无 tty（报 failed tty get）与中文 locale 下取空。改用 `/proc/stat` 两次采样求差，替换 CPU 行；实测 12.6%、24.5%。
+- ③菜单太短：`zenity --list` 加 `--width=520 --height=360`。
+- ④解释截图写屏：chromium headless 渲染 480x320 PNG → 转 RGB565 写 `/dev/fb1`，小屏得到静态快照，每 N 秒重拍；小屏不能滚动/点击，动图视频不动。
+- 启动器改用单 token 包装脚本（`lxterminal -e` 会吞参数），4 个 `.desktop` `desktop-file-validate` 全 OK；`run_info.sh` 实测产出带 CPU 数值的文本，`run_stop.sh` 清屏。
+- 仓库副本 `drivers_extracted/apply/desktop/` 已同步 11 个文件。

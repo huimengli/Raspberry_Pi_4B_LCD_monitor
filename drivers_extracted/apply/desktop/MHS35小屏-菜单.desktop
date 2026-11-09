@@ -3,7 +3,7 @@ Version=1.0
 Type=Application
 Name=MHS35小屏 菜单
 Comment=选择小屏显示内容
-Exec=/home/huimengli/Desktop/MHS35小屏切换.sh menu
+Exec=/home/huimengli/Desktop/run_menu.sh
 Icon=utilities-terminal
 Terminal=false
 

@@ -149,6 +149,11 @@
   "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\350\217\234\345\215\225.desktop"
   "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217\345\210\207\346\215\242.sh"
   drivers_extracted/apply/desktop/mhs35_fb1_draw.py
+  drivers_extracted/apply/desktop/mhs35_info.py
+  drivers_extracted/apply/desktop/run_html.sh
+  drivers_extracted/apply/desktop/run_info.sh
+  drivers_extracted/apply/desktop/run_menu.sh
+  drivers_extracted/apply/desktop/run_stop.sh
   drivers_extracted/apply/fb1_draw.py
   drivers_extracted/apply/fb1_test.sh
   drivers_extracted/apply/fix_touch_keyboard.sh
