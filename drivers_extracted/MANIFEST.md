@@ -132,3 +132,13 @@ e74a7a85f1046f3ce379124d0934faee  boot_firmware/cmdline.txt
 - `apply/switch_small_screen.sh`：小屏内容切换，子命令 `info`（跑 `getInfoCN.py` 抓取输出，每 N 秒刷新）/ `html <文件或URL>`（chromium `--headless=new --window-size=480,320 --screenshot` 截图后写屏）/ `image <png>` / `fill <颜色>` / `stop`（清屏交还控制台）/ `status`。需 sudo（写 `/dev/fb1`）。
 - 依赖：`python3-pil`（已装 11.1.0）、`chromium`（已装 154.0.8037）、`DejaVuSans.ttf`、`DroidSansFallbackFull.ttf`；`python3-evdev` 未装（本方案不需要）。
 - 已验证：文本渲染预览（`tmp/preview_info2.png`）、chromium 截图链路（`tmp/fb1_html.png`，480x320）、fb1 字节流 307200 = 480×320×2。真机写屏需用户 sudo 执行。
+## 桌面版小屏切换（2026-11-09 追加，用户要求放在桌面上）
+
+- 关键发现：`/dev/fb1` 权限 `root:video 660`，用户 `huimengli` 在 `video` 组 → **无需 sudo 即可写屏**，脚本可直接双击运行。实测 `python3 fb1_draw.py --fill red --fb /dev/fb1` 成功。
+- 桌面交付物（已装到 `/home/huimengli/Desktop/`，仓库副本在 `apply/desktop/`）：
+  - `MHS35小屏切换.sh`：子命令 `menu`(zenity 菜单) / `info` / `html` / `image` / `fill` / `stop` / `status`；循环模式挂 trap，退出即清屏
+  - `mhs35_fb1_draw.py`：文本/图片/纯色 → RGB565 写 fb1（CJK 用 Droid，拉丁用 DejaVu 分段）
+  - `MHS35小屏-菜单.desktop`、`MHS35小屏-系统信息.desktop`、`MHS35小屏-网页.desktop`、`MHS35小屏-停止.desktop`（`desktop-file-validate` 全部 OK）
+- 修复要点：`info` 模式抓 `getInfoCN.py` 输出必须用 `python3 -u` + `timeout 3`，否则重定向到文件时是块缓冲，被 timeout 杀掉前不落盘，抓到 0 字节（实测抓到 864 字节，CPU 温度真实值）。
+- 限制：`Exec` 里不能有引号与 `&`（`desktop-file-validate` 报 reserved character），故用绝对路径 + 参数；首次双击需在文件管理器右键「Allow Launching」。
+- 首次安装版 `apply/switch_small_screen.sh`（sudo 版）保留作参考，日常用桌面版。

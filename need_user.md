@@ -59,3 +59,17 @@
 
 - 用户反馈：fix_touch_keyboard.sh（mouseEmulation→no）执行后仍然弹触摸键盘 → 弹出者不是 labwc 鼠标模拟路径
 - 需要：键盘外观/标题栏，或弹出时打开的程序；可执行 sudo ps -eo comm | grep -iE 'kbd|keyboard|wvkbd' 看进程名
+## Q5 关闭（2026-11-09-10-37）
+
+- status: done
+- 用户答复：「小屏幕我暂时没想好，能不能做个切换的sh，允许执行并显示 getInfoCN.py 或显示 html 相同内容」+ 2026-11-09 追加「你将切换sh放在桌面上」
+- Agent 交付：`~/Desktop/MHS35小屏切换.sh`（info/html/image/fill/stop/menu），免 sudo，双击启动器 4 个
+
+## Q6 关闭（2026-11-09-10-37）
+
+- status: done
+- 用户答复：「现在我将网页端映射到别的设备了,不用管虚拟键盘了」→ 不再追查弹出来源，`mouseEmulation=no` 修改保留
+
+## Q4 仍 wait
+
+- HDMI 分辨率档位（当前 1280x720）未确认

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MHS35小屏 网页
+Comment=小屏显示网页(弹窗输入地址)
+Exec=/home/huimengli/Desktop/MHS35小屏切换.sh html
+Icon=utilities-terminal
+Terminal=false
+

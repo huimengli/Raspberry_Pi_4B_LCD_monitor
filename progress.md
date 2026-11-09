@@ -67,3 +67,11 @@
 - 验证：chromium --headless=new --window-size=480,320 --screenshot 产出 480x320 PNG（tmp/fb1_html.png，中文正常）；fb1 写入字节数 307200 = 480*320*2 匹配。
 - 抓取 getInfoCN 输出用 timeout 1 python3 app（对 print→sleep 循环有效，沙箱内验证机制可用，vcgencmd/top 在沙箱受限属正常）。
 - 脚本 bash -n 通过；写 /dev/fb1 需 root，由用户 sudo 执行。
+## 2026-11-09-10-37 会话 7：小屏切换脚本落地桌面（免 sudo），键盘问题按用户决定关闭
+
+- 用户三点指令：已开完全权限；把切换 sh 放到桌面上；网页端已映射到别的设备，不用管虚拟键盘（Q6 按用户决定 done，不再追查）。
+- 关键发现：`/dev/fb1` 是 `root:video 660` 且 `huimengli` 在 `video` 组 → 免 sudo 直接写屏，实测 `--fill red` 成功，双击启动器可行。
+- 交付到 `/home/huimengli/Desktop/`：`MHS35小屏切换.sh`（menu/info/html/image/fill/stop/status）、`mhs35_fb1_draw.py`、4 个 `.desktop` 启动器（菜单/系统信息/网页/停止），`desktop-file-validate` 全 OK，仓库副本 `apply/desktop/`。
+- 修掉两个真 bug：① `info` 抓输出用 `python3 -u` + `timeout 3`（重定向块缓冲导致抓到 0 字节），实测 864 字节含真实 CPU 温度；② `.desktop` 的 `Exec` 含引号与 `&` 被 validate 拒绝，改绝对路径+参数；另修 `[Desktop Entry]` 组头（首版写成注释）。
+- 清屏 trap 只挂在 info/html 循环里，避免 `fill`/`status` 退出时把刚画的颜色刷黑。
+- 限制记录：`top -n1` 在无 tty 的环境返回空（沙箱实测），从 lxterminal 启动的 info 模式不受影响。

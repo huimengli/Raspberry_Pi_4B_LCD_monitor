@@ -143,6 +143,12 @@
   drivers_extracted/LCD-show/xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb
   drivers_extracted/LCD-show/xserver-xorg-input-evdev_2.10.5-1_armhf.deb
   drivers_extracted/MANIFEST.md
+  "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\345\201\234\346\255\242.desktop"
+  "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\347\263\273\347\273\237\344\277\241\346\201\257.desktop"
+  "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\347\275\221\351\241\265.desktop"
+  "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\350\217\234\345\215\225.desktop"
+  "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217\345\210\207\346\215\242.sh"
+  drivers_extracted/apply/desktop/mhs35_fb1_draw.py
   drivers_extracted/apply/fb1_draw.py
   drivers_extracted/apply/fb1_test.sh
   drivers_extracted/apply/fix_touch_keyboard.sh

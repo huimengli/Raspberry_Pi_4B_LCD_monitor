@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MHS35小屏 系统信息
+Comment=小屏显示 getInfoCN.py，每2秒刷新，关窗口清屏
+Exec=lxterminal -e /home/huimengli/Desktop/MHS35小屏切换.sh info 2
+Icon=utilities-terminal
+Terminal=false
+
