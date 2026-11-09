@@ -19,6 +19,18 @@ def is_cjk(ch):
 
 def to_rgb565_raw(img):
     img = img.convert("RGB").resize((W, H))
+    try:
+        import numpy as np  # 向量转换约0.04秒(纯Python逐像素约0.6秒)
+        a = np.frombuffer(img.tobytes(), dtype=np.uint8).reshape(H, W, 3)
+        v = ((a[:,:,0].astype("uint16") >> 3) << 11) | ((a[:,:,1].astype("uint16") >> 2) << 5) | (a[:,:,2].astype("uint16") >> 3)
+        return v.astype("<u2").tobytes()
+    except ImportError:
+        out = bytearray()
+        for r, g, b in img.getdata():
+            px = ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3)
+            out += px.to_bytes(2, "little")
+        return bytes(out)
+    img = img.convert("RGB").resize((W, H))
     out = bytearray()
     for r, g, b in img.getdata():
         px = ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3)

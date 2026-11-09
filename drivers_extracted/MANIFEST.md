@@ -149,3 +149,10 @@ e74a7a85f1046f3ce379124d0934faee  boot_firmware/cmdline.txt
 - 问题③：菜单太短显示不全。`zenity --list` 加 `--width=520 --height=360`，条目文案缩短。
 - 问题④（说明）：`html` 模式 = `chromium --headless=new --window-size=480,320 --screenshot` 把网页渲染成 480x320 PNG，再转 RGB565 写入 `/dev/fb1`；小屏得到的是**静态快照**，每 N 秒重拍一次，小屏上不能滚动/点击，动图与视频不会动。
 - 启动器改造：`lxterminal -e` 会吞掉 `脚本 参数` 里的参数，改为单 token 包装脚本 `run_menu.sh`/`run_info.sh`/`run_html.sh`/`run_stop.sh`，`.desktop` 的 `Exec` 只指向包装脚本，`desktop-file-validate` 全 OK。
+## 刷新速率（2026-11-09-11-12，用户问「为什么2秒，能否1秒」）
+
+- 2 秒只是参数，不是限制。真机瓶颈：抓 getInfoCN.py 每轮要跑一遍程序，程序自带 top -n1（top 自己 1 秒采样）→ 每轮 2.1 秒（实测），所以那一版默认 2 秒。
+- 新增 mhs35_daemon.py 常驻渲染器：单进程循环，避免每轮 python 启动(127ms) 与 numpy 导入(约200ms)。实测每轮 采集 0.408s(CPU 采样窗口) + 渲染 0.106s + 转 RGB565 0.021s + 写屏 0.001s ≈ 0.54s，配 loop_pace 自我调速后 1 秒周期稳定。
+- gen 子命令走常驻渲染器（默认 1 秒），info 子命令仍抓 getInfoCN.py（默认 2 秒，保真）。菜单与 MHS35小屏-系统信息.desktop 现走 1 秒版。
+- CPU 使用率有物理下限：必须有采样窗口（用 0.4 秒），所以 1 秒刷新合理，0.5 秒刷新对 CPU 占用无意义。
+- 顺带优化：to_rgb565_raw 用 numpy 向量转换（0.04s 对比逐像素 0.6s，输出逐字节一致）。
