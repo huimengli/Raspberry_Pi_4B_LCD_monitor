@@ -35,6 +35,8 @@
 - `a57d605` perf(AI): 刷新改 1 秒（常驻渲染器+自我调速）
 - `1e69dcc` docs(AI): 补记 99dce87 与 a57d605
 - `087b9bb` feat(AI): 桌面清理、开机自启每秒显示、stopall 杀光小屏进程 —— 本地 commit，未 push
+- `8d36e3c` docs(AI): 补记 commit 087b9bb —— 本地 commit，未 push
+- `180b159` docs(AI): README 更新为当前状态，安装位置备份入工作区 —— 本地 commit，未 push
 
 ## 2026-11-09-11-43 会话 10：桌面清理 + 自启 + 杀光小屏进程
 
