@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MHS35小屏 菜单
+Comment=选择小屏显示内容
+Exec=/home/huimengli/.local/share/mhs35/MHS35小屏切换.sh menu
+Icon=utilities-terminal
+Terminal=false

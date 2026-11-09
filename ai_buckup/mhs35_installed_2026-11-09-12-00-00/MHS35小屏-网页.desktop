@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MHS35小屏 网页
+Comment=输入地址，每5秒截图写屏
+Exec=/home/huimengli/.local/share/mhs35/MHS35小屏切换.sh html
+Icon=utilities-terminal
+Terminal=false

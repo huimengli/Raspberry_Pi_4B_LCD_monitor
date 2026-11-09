@@ -1,5 +1,16 @@
   .gitignore
   README.md
+  ai_buckup/README.md_2026-11-09-12-01-00.md
+  "ai_buckup/mhs35_installed_2026-11-09-12-00-00/MHS35\345\260\217\345\261\217-\345\205\250\351\203\250\345\201\234\346\255\242.desktop"
+  "ai_buckup/mhs35_installed_2026-11-09-12-00-00/MHS35\345\260\217\345\261\217-\346\257\217\347\247\222\346\230\276\347\244\272.desktop"
+  "ai_buckup/mhs35_installed_2026-11-09-12-00-00/MHS35\345\260\217\345\261\217-\347\263\273\347\273\237\344\277\241\346\201\257.desktop"
+  "ai_buckup/mhs35_installed_2026-11-09-12-00-00/MHS35\345\260\217\345\261\217-\347\275\221\351\241\265.desktop"
+  "ai_buckup/mhs35_installed_2026-11-09-12-00-00/MHS35\345\260\217\345\261\217-\350\217\234\345\215\225.desktop"
+  "ai_buckup/mhs35_installed_2026-11-09-12-00-00/MHS35\345\260\217\345\261\217\345\210\207\346\215\242.sh"
+  ai_buckup/mhs35_installed_2026-11-09-12-00-00/SHA256SUMS.txt
+  ai_buckup/mhs35_installed_2026-11-09-12-00-00/mhs35_daemon.py
+  ai_buckup/mhs35_installed_2026-11-09-12-00-00/mhs35_fb1_draw.py
+  ai_buckup/mhs35_installed_2026-11-09-12-00-00/mhs35_info.py
   ai_buckup/need_user.md_2026-11-07-12-52-00.md
   ai_buckup/need_user.md_2026-11-07-14-17-00.md
   ai_buckup/progress.md_2026-11-09-11-43-00.md
