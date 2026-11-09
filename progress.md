@@ -36,7 +36,7 @@
 - `c06a7d6` feat(AI): 小屏切换脚本落地桌面（免 sudo）并附 4 个双击启动器 —— 本地 commit，未 push
 - `7cd8e66` docs(AI): 补记 commit c06a7d6 —— 本地 commit，未 push
 - `cb5cc1f` fix(AI): 修复小屏信息捕获、CPU 数值与菜单高度，启动器改用包装脚本 —— 本地 commit，未 push
-- `0e6d0e6` docs(AI): 补记 commit cb5cc1f —— 本地 commit，未 push
+- `079ae57` docs(AI): 补记 commit 7cd8e66 与 cb5cc1f —— 本地 commit，未 push
 ## 2026-11-07-14-17 会话 3：用户答复 Q2/Q3，准备安装
 
 - Q2 答复：针接口屏只有 1 块（3.5 寸、可触摸，即 MHS35）；老系统靠 `fbcp` 让两块屏显示**相同内容（镜像）**。
