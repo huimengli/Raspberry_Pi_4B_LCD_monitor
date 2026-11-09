@@ -1,9 +1,8 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=MHS35小屏 系统信息
-Comment=小屏显示系统信息，每2秒刷新，关窗口清屏
-Exec=lxterminal -e /home/huimengli/Desktop/run_info.sh
+Name=MHS35小屏 系统信息(1秒)
+Comment=常驻渲染器1秒刷新，关窗口清屏
+Exec=lxterminal -e /home/huimengli/.local/share/mhs35/MHS35小屏切换.sh gen 1
 Icon=utilities-terminal
 Terminal=false
-

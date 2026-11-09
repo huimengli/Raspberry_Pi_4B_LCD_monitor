@@ -156,3 +156,9 @@ e74a7a85f1046f3ce379124d0934faee  boot_firmware/cmdline.txt
 - gen 子命令走常驻渲染器（默认 1 秒），info 子命令仍抓 getInfoCN.py（默认 2 秒，保真）。菜单与 MHS35小屏-系统信息.desktop 现走 1 秒版。
 - CPU 使用率有物理下限：必须有采样窗口（用 0.4 秒），所以 1 秒刷新合理，0.5 秒刷新对 CPU 占用无意义。
 - 顺带优化：to_rgb565_raw 用 numpy 向量转换（0.04s 对比逐像素 0.6s，输出逐字节一致）。
+## 安装位置与自启（2026-11-09-11-43）
+
+- 实现代码安装位置：`~/.local/share/mhs35/`（`MHS35小屏切换.sh`、`mhs35_daemon.py`、`mhs35_fb1_draw.py`、`mhs35_info.py`），桌面只留 4 个 `.desktop` 启动器；仓库副本在 `drivers_extracted/apply/desktop/`（含 `autostart/`）。
+- 自启：`~/.config/autostart/MHS35小屏-每秒显示.desktop` → `Exec=/usr/bin/python3 .../mhs35_daemon.py 1`，`NoDisplay=true`；`/etc/xdg/labwc/autostart` 内含 `lxsession-xdg-autostart`，实跑验证自启进程启动。开关：`MHS35小屏切换.sh auto-off` / `auto-on`。
+- 杀进程：`stopall` 子命令（启动器「MHS35小屏 全部停止」）杀 daemon/渲染/循环进程并清屏。模式必须锚定解释器 `^(/usr/bin/)?python3`（自启用的就是 /usr/bin/python3），并排除 `$$` 与父进程；用 `pkill -f` 会连自己的命令行一起杀（实测被 SIGTERM）。
+- 单实例锁：flock 句柄必须保存在全局变量（`LOCKFH`），否则句柄被回收锁就释放，会出现两个渲染器互相覆盖 —— 这是用户看到「清屏无效」的两个根因之一（另一个是旧路径进程未死）。

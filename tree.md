@@ -2,6 +2,7 @@
   README.md
   ai_buckup/need_user.md_2026-11-07-12-52-00.md
   ai_buckup/need_user.md_2026-11-07-14-17-00.md
+  ai_buckup/progress.md_2026-11-09-11-43-00.md
   drivers_extracted/LCD-show/.have_installed
   drivers_extracted/LCD-show/.system_backup/.have_installed
   drivers_extracted/LCD-show/.system_backup/99-fbturbo.conf
@@ -144,10 +145,12 @@
   drivers_extracted/LCD-show/xserver-xorg-input-evdev_2.10.5-1_armhf.deb
   drivers_extracted/MANIFEST.md
   "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\345\201\234\346\255\242.desktop"
+  "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\345\205\250\351\203\250\345\201\234\346\255\242.desktop"
   "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\347\263\273\347\273\237\344\277\241\346\201\257.desktop"
   "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\347\275\221\351\241\265.desktop"
   "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217-\350\217\234\345\215\225.desktop"
   "drivers_extracted/apply/desktop/MHS35\345\260\217\345\261\217\345\210\207\346\215\242.sh"
+  "drivers_extracted/apply/desktop/autostart/MHS35\345\260\217\345\261\217-\346\257\217\347\247\222\346\230\276\347\244\272.desktop"
   drivers_extracted/apply/desktop/mhs35_daemon.py
   drivers_extracted/apply/desktop/mhs35_fb1_draw.py
   drivers_extracted/apply/desktop/mhs35_info.py
@@ -240,5 +243,6 @@
   need_user.md
   progress.md
   records/2026-11-07-12-16-48.md
+  records/2026-11-09-11-42-00.md
   todo.md
   tree.md

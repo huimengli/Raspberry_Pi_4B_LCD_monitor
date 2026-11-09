@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MHS35小屏 全部停止
+Comment=杀掉所有小屏进程并清屏
+Exec=lxterminal -e /home/huimengli/.local/share/mhs35/MHS35小屏切换.sh stopall
+Icon=utilities-terminal
+Terminal=false
